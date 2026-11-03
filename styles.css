@@ -222,6 +222,7 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
   font: 500 10px/1 var(--mono); padding: 3px 5px; background: var(--det-ok); color: #0b0b0b;
 }
 .ann--group { border-style: dashed; }
+.ann--out::after { top: auto; bottom: 100%; }   /* rótulo por fora, para não cobrir texto */
 .ann:hover { background: color-mix(in srgb, var(--det-ok) 14%, transparent); }
 .shot.annotated .ann.on { opacity: 1; transform: none; }
 
