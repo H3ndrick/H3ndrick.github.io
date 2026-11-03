@@ -45,7 +45,7 @@
   const SUGGESTION = { l: 10.5, t: 70, w: 16.5, h: 13.5 };
 
   let offCount = 0, start = null, box = null;
-  const area = (r) => (r.w * r.h / 100).toFixed(1);
+  const area = (r) => (r.w * r.h / 100).toFixed(1).replace('.', ',');
 
   const makeBox = (cls, label, r) => {
     const el = document.createElement('div');
