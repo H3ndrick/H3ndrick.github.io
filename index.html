@@ -148,6 +148,68 @@
           <p class="proj__links">
             <a href="https://github.com/YagorVitor/Hackathon-Ifood" target="_blank" rel="noopener">código</a>
           </p>
+
+          <!-- Quadros extraídos da gravação do fluxo completo (endereço desfocado). -->
+          <figure class="shot" aria-label="Quadros do CompletAi em funcionamento, com anotações">
+            <div class="shot__bar mono">
+              <span class="shot__file">completai/inicio</span>
+              <span class="shot__nav">
+                <button type="button" class="shot__btn" data-step="-1" aria-label="Imagem anterior">◂</button>
+                <span class="shot__count">0001 / 0006</span>
+                <button type="button" class="shot__btn" data-step="1" aria-label="Próxima imagem">▸</button>
+              </span>
+              <button type="button" class="shot__toggle" aria-pressed="true">anotações</button>
+            </div>
+            <div class="shot__frame">
+              <div class="shot__item" data-file="completai/inicio">
+                <img src="img/completai-1-inicio.webp" width="1440" height="900" loading="lazy"
+                     alt="Tela inicial do CompletAi: etapas do fluxo, conta iFood conectada e campo para descrever a despensa">
+                <div class="ann" style="--l:81.6; --t:3; --w:10.8; --h:4" data-label="OAuth · iFood"></div>
+                <div class="ann ann--out" style="--l:17; --t:12.8; --w:64.6; --h:4.2" data-label="fluxo em 4 etapas"></div>
+                <div class="ann" style="--l:6.6; --t:52.3; --w:63.3; --h:10.3" data-label="conta conectada"></div>
+                <div class="ann" style="--l:8.5; --t:75.9; --w:59.4; --h:16.1" data-label="entrada · texto"></div>
+              </div>
+              <div class="shot__item" data-file="completai/foto" hidden>
+                <img src="img/completai-2-foto.webp" width="1440" height="900" loading="lazy"
+                     alt="Modal Mostre sua despensa capturando pela câmera uma foto com ketchup e maionese">
+                <div class="ann ann--group ann--out" style="--l:26.9; --t:15.4; --w:45.1; --h:75.5" data-label="entrada · câmera"></div>
+                <div class="ann" style="--l:32.3; --t:37.1; --w:11.9; --h:37.3" data-label="ketchup 0.94"></div>
+                <div class="ann" style="--l:44.6; --t:46.2; --w:9; --h:28.2" data-label="maionese 0.91"></div>
+                <div class="ann" style="--l:55; --t:48.5; --w:6; --h:12.7" data-label="batata 0.62"></div>
+              </div>
+              <div class="shot__item" data-file="completai/sugestoes" hidden>
+                <img src="img/completai-3-sugestoes.webp" width="1440" height="900" loading="lazy"
+                     alt="Três sugestões do agente: aproveitar o que tem, completar no mercado e conveniência">
+                <div class="ann ann--out" style="--l:6.6; --t:3.5; --w:10.8; --h:5.3" data-label="voz · TTS"></div>
+                <div class="ann ann--out" style="--l:6.6; --t:18.6; --w:20.4; --h:81.2" data-label="aproveitar"></div>
+                <div class="ann ann--out" style="--l:27.9; --t:18.6; --w:20.4; --h:81.2" data-label="completar no mercado"></div>
+                <div class="ann ann--out" style="--l:49.3; --t:18.6; --w:20.4; --h:81.2" data-label="conveniência"></div>
+                <div class="ann ann--out" style="--l:73.4; --t:20; --w:17.4; --h:10.8" data-label="ingredientes reconhecidos"></div>
+              </div>
+              <div class="shot__item" data-file="completai/oferta" hidden>
+                <img src="img/completai-4-oferta.webp" width="1440" height="900" loading="lazy"
+                     alt="Oferta de carne moída retornada pelo MCP do iFood, com loja, preço, frete e custo estimado">
+                <div class="ann ann--out" style="--l:8.1; --t:22.7; --w:60.3; --h:17.3" data-label="oferta · MCP iFood"></div>
+                <div class="ann" style="--l:8.1; --t:41.6; --w:60.3; --h:19.6" data-label="custo estimado"></div>
+                <div class="ann" style="--l:8.1; --t:62.7; --w:60.3; --h:5.9" data-label="montar carrinho"></div>
+              </div>
+              <div class="shot__item" data-file="completai/revisao" hidden>
+                <img src="img/completai-5-revisao.webp" width="1440" height="900" loading="lazy"
+                     alt="Revisão do carrinho antes de confirmar, com item, subtotal estimado e aviso do que acontece ao confirmar">
+                <div class="ann ann--out" style="--l:6.6; --t:17.9; --w:63.3; --h:46.4" data-label="carrinho proposto"></div>
+                <div class="ann" style="--l:8.1; --t:35.1; --w:60.1; --h:5.2" data-label="endereço · oculto"></div>
+                <div class="ann" style="--l:6.6; --t:66.4; --w:63.3; --h:10.8" data-label="confirmação humana"></div>
+              </div>
+              <div class="shot__item" data-file="completai/resultado" hidden>
+                <img src="img/completai-6-resultado.webp" width="1440" height="900" loading="lazy"
+                     alt="Resultado do MCP do iFood: itens conferidos no carrinho com subtotal, descontos e total">
+                <div class="ann ann--out" style="--l:17; --t:13; --w:66; --h:4.2" data-label="etapa 4/4"></div>
+                <div class="ann ann--out" style="--l:6.6; --t:30.4; --w:63.3; --h:11.7" data-label="resposta · MCP iFood"></div>
+                <div class="ann ann--out" style="--l:8.1; --t:59; --w:60.3; --h:14.7" data-label="totais do iFood"></div>
+              </div>
+              <div class="shot__scan" aria-hidden="true"></div>
+            </div>
+          </figure>
         </li>
 
         <li class="proj" data-det="projeto">

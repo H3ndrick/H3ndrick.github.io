@@ -1,8 +1,9 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><style>body{margin:0;display:grid;gap:12px;background:#888}iframe{border:0}</style></head>
+<html><head><meta charset="utf-8"><style>body{margin:0;display:grid;gap:8px;background:#888}iframe{border:0}</style></head>
 <body>
-<iframe id="a" src="index.html" width="1200" height="800"></iframe>
-<iframe id="b" src="index.html" width="1200" height="800"></iframe>
+<iframe id="a" src="index.html" width="1200" height="660"></iframe>
+<iframe id="b" src="index.html" width="1200" height="660"></iframe>
+<iframe id="c" src="index.html" width="1200" height="660"></iframe>
 <script>
   const go = (id, steps) => {
     const f = document.getElementById(id);
@@ -11,12 +12,10 @@
       d.documentElement.style.scrollBehavior = 'auto';
       d.querySelectorAll('.block').forEach(b => b.classList.add('seen'));
       const s = d.querySelector('.shot');
-      w.scrollTo(0, s.getBoundingClientRect().top + w.scrollY - 60);
-      setTimeout(() => {
-        for (let i = 0; i < steps; i++) d.querySelector('.shot__btn[data-step="1"]').click();
-      }, 400);
+      w.scrollTo(0, s.getBoundingClientRect().top + w.scrollY - 70);
+      setTimeout(() => { for (let i = 0; i < steps; i++) s.querySelector('.shot__btn[data-step="1"]').click(); }, 400);
     });
   };
-  go('a', 2); go('b', 3);
+  go('a', 1); go('b', 2); go('c', 5);
 </script>
 </body></html>
