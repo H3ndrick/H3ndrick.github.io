@@ -443,6 +443,30 @@
           A métrica (<code>iou()</code>) foi implementada e testada por mim;
           a interface do jogo foi construída com apoio de IA.
         </p>
+
+        <h3 class="sub">Próximos experimentos</h3>
+        <ul class="wip">
+          <li class="wip__item" data-det="em desenvolvimento">
+            <span class="wip__tag mono">em desenvolvimento</span>
+            <h4>Detector ao vivo</h4>
+            <p>
+              Um detector de objetos de verdade rodando no seu navegador: aponte a câmera, ou envie uma foto,
+              e o modelo desenha as caixas em tempo real, sem enviar nada para servidor. As ROI-OFFs do
+              quadro CAM-01 passam a valer para o modelo de verdade.
+            </p>
+            <p class="wip__stack mono">inferência no navegador · pré e pós-processamento · NMS</p>
+          </li>
+          <li class="wip__item" data-det="em desenvolvimento">
+            <span class="wip__tag mono">em desenvolvimento</span>
+            <h4>Pergunte ao meu currículo</h4>
+            <p>
+              Você faz uma pergunta sobre a minha experiência e vê os trechos deste portfólio mais
+              relevantes, com a pontuação de cada um: a etapa de recuperação de um RAG, feita às claras,
+              sem LLM e sem resposta inventada.
+            </p>
+            <p class="wip__stack mono">BM25 · busca semântica · avaliação com Recall@k e MRR</p>
+          </li>
+        </ul>
       </div>
     </section>
 

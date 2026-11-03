@@ -280,6 +280,19 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
 .lab__note { margin-top: 14px; font-size: .76rem; color: var(--ink-2); max-width: 46em; line-height: 1.6; }
 .lab__note code { font-family: var(--mono); color: var(--ink); }
 
+/* próximos experimentos: caixas tracejadas "aguardando anotação" */
+.wip { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 40px 24px; margin-top: 34px; }
+.wip__item { position: relative; border: 1.5px dashed var(--rule); padding: 26px 20px 20px; transition: border-color .2s; }
+.wip__item:hover { border-color: var(--mark); }
+.wip__tag {
+  position: absolute; left: -1.5px; top: -1.5px; transform: translateY(-100%);
+  font-size: .68rem; padding: 3px 6px; background: var(--rule); color: var(--ink);
+}
+.wip__item:hover .wip__tag { background: var(--mark); color: var(--mark-ink); }
+.wip__item h4 { font: 400 1.6rem/1.1 var(--serif); margin: 0 0 10px; }
+.wip__item p { color: var(--ink-2); font-size: .95rem; }
+.wip__stack { margin-top: 14px; font-size: .74rem; color: var(--ink) !important; }
+
 /* stack */
 .stack { display: grid; }
 .stack div { display: grid; grid-template-columns: 180px 1fr; gap: 16px; padding: 12px 0; border-top: 1px solid var(--rule); }
