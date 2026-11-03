@@ -277,6 +277,8 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
 .game__msg { font-size: .78rem; line-height: 1.45; min-height: 1.45em; flex: 1 1 260px; }
 .game__actions { display: flex; align-items: center; gap: 10px; }
 .game__actions .link-btn { color: var(--cam-ink); }
+.lab__note { margin-top: 14px; font-size: .76rem; color: var(--ink-2); max-width: 46em; line-height: 1.6; }
+.lab__note code { font-family: var(--mono); color: var(--ink); }
 
 /* stack */
 .stack { display: grid; }

@@ -36,6 +36,8 @@
   let idx = 0, results = [], userBox = null, start = null, drawing = null, locked = false;
 
   const fmt = (v) => v.toFixed(2).replace('.', ',');
+  // "de" + artigo: "o ketchup" → "do ketchup", "a maionese" → "da maionese"
+  const deAlvo = (alvo) => alvo.replace(/^o /, 'do ').replace(/^a /, 'da ');
   const toPx = (r) => ({ x1: r.l / 100 * IMG_W, y1: r.t / 100 * IMG_H, x2: (r.l + r.w) / 100 * IMG_W, y2: (r.t + r.h) / 100 * IMG_H });
 
   function makeBox(cls, label, r) {
@@ -69,7 +71,7 @@
     img.alt = `Imagem do ${r.origem} para anotar: marque ${r.alvo}`;
     roundEl.textContent = `rodada ${i + 1}/${ROUNDS.length}`;
     targetEl.textContent = r.alvo;
-    msg.textContent = `Arraste para desenhar uma caixa em volta de ${r.alvo}.`;
+    msg.textContent = `Arraste para desenhar uma caixa em volta ${deAlvo(r.alvo)}.`;
     setButtons({});
     updateScore();
   }
@@ -114,7 +116,7 @@
   // ----- avaliação -----
   btnRetry.addEventListener('click', () => {
     layer.innerHTML = ''; userBox = null;
-    msg.textContent = `Arraste para desenhar uma caixa em volta de ${ROUNDS[idx].alvo}.`;
+    msg.textContent = `Arraste para desenhar uma caixa em volta ${deAlvo(ROUNDS[idx].alvo)}.`;
     setButtons({});
   });
 
