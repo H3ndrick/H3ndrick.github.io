@@ -36,6 +36,16 @@ Cada projeto pode ter um visualizador no estilo "dataset anotado": a linha de va
 
 Cada `.shot__item` é um frame; com mais de um, aparecem os botões ◂ ▸.
 
+### Lab: "Anote como eu" (`js/game.js` + `js/iou.js`)
+
+Jogo de anotação: o visitante desenha uma caixa e recebe o IoU com a caixa de referência.
+
+- **Interface e rodadas:** `js/game.js`, feito com apoio de IA. As caixas de referência ficam em `ROUNDS`, em % da imagem.
+- **Métrica:** `js/iou.js`, a implementar (TODO). O contrato está documentado no próprio arquivo.
+- **Testes:** `node --test tests/`, na raiz do projeto. Precisa do Node: no WSL ele ainda não está instalado; dá para rodar pelo PowerShell do Windows (`cd \\wsl.localhost\Ubuntu\home\hendrick\projetos\portfolio`) ou instalar o Node no WSL via nvm.
+
+Planejamento dos próximos recursos: `docs/PLANEJAMENTO.md`.
+
 ## Versões
 
 A primeira versão está salva na tag `v1-backup`, na branch `backup/v1` e em `~/projetos/portfolio-v1-backup/`.

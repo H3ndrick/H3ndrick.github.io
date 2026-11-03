@@ -26,6 +26,7 @@
       <nav class="top__nav" aria-label="Principal">
         <a href="#trabalho">Trabalho</a>
         <a href="#projetos">Projetos</a>
+        <a href="#lab">Lab</a>
         <a href="#stack">Stack</a>
         <a href="#contato">Contato</a>
       </nav>
@@ -407,6 +408,42 @@
       </ol>
     </section>
 
+    <!-- LAB -->
+    <section class="block wrap" id="lab">
+      <h2 class="block__label">Lab</h2>
+      <div class="block__body">
+        <h3 class="lab__title">Anote como eu</h3>
+        <p class="lab__lead">
+          Parte do meu trabalho é anotar imagens para treinar modelos de visão computacional.
+          Desenhe uma caixa em volta do objeto pedido: a nota é o <abbr title="Intersection over Union">IoU</abbr>
+          entre a sua caixa e a de referência, a mesma métrica usada para avaliar detectores.
+        </p>
+        <figure class="game" data-det="jogo">
+          <div class="game__bar mono">
+            <span id="game-round">rodada 1/5</span>
+            <span class="game__target">alvo: <b id="game-target">—</b></span>
+            <span id="game-score">média —</span>
+          </div>
+          <div class="game__frame" id="game-frame" role="application"
+               aria-label="Área de anotação: arraste para desenhar uma caixa em volta do objeto pedido">
+            <img id="game-img" src="img/completai-2-foto.webp" width="1440" height="900" alt="" draggable="false">
+            <div class="game__layer" id="game-layer"></div>
+            <div class="game__end" id="game-end" hidden></div>
+          </div>
+          <div class="game__panel">
+            <p class="game__msg mono" id="game-msg" aria-live="polite"></p>
+            <div class="game__actions">
+              <button type="button" class="link-btn mono" id="game-retry" hidden>redesenhar</button>
+              <button type="button" class="tool" id="game-confirm" hidden>confirmar</button>
+              <button type="button" class="tool" id="game-next" hidden>próxima →</button>
+            </div>
+          </div>
+        </figure>
+        <!-- TODO(hendrick): depois de implementar js/iou.js, adicionar uma nota dizendo que a métrica é sua
+             e a interface foi feita com apoio de IA. -->
+      </div>
+    </section>
+
     <!-- STACK -->
     <section class="block wrap" id="stack">
       <h2 class="block__label">Stack</h2>
@@ -481,6 +518,8 @@
   <div class="det-layer" id="det-layer" aria-hidden="true"></div>
   <p class="det-hud mono" id="det-hud" aria-live="polite"></p>
 
+  <script src="js/iou.js"></script>
+  <script src="js/game.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
