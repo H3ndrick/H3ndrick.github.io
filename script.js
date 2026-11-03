@@ -181,14 +181,15 @@
       const r = el.getBoundingClientRect();
       const fixed = !!el.closest(STICKY);
       const ox = fixed ? 0 : window.scrollX, oy = fixed ? 0 : window.scrollY;
+      const pad = el.matches('.rows li') ? 0 : 6;   // linhas vizinhas: sem folga para não sobrepor
       const d = document.createElement('div');
-      d.className = 'det' + (r.top + oy - 6 < 20 ? ' det--inside' : '');
+      d.className = 'det' + (r.top + oy - pad < 20 ? ' det--inside' : '') + (pad ? '' : ' det--row');
       d.style.setProperty('--c', classColor[cls]);
       Object.assign(d.style, {
-        left: r.left + ox - 6 + 'px',
-        top: r.top + oy - 6 + 'px',
-        width: r.width + 12 + 'px',
-        height: r.height + 12 + 'px',
+        left: r.left + ox - pad + 'px',
+        top: r.top + oy - pad + 'px',
+        width: r.width + pad * 2 + 'px',
+        height: r.height + pad * 2 + 'px',
         animationDelay: reduceMotion ? '0s' : i * 40 + 'ms',
       });
       const tag = document.createElement('span');
