@@ -11,11 +11,29 @@
  *
  * Usada pelo jogo "Anote como eu" (js/game.js) e, no futuro, pelo NMS do detector.
  *
- * Testes: na raiz do projeto, rode  node --test tests/
+ * Testes: na raiz do projeto, rode  node --test tests/iou.test.mjs
  */
 function iou(a, b) {
-  // TODO(hendrick): implementar.
-  throw new Error('iou() ainda não implementada');
+  const areaA = (a.x2 - a.x1) * (a.y2 - a.y1);
+  const areaB = (b.x2 - b.x1) * (b.y2 - b.y1);
+
+  // interseção
+  const maiorX1 = Math.max(a.x1, b.x1);
+  const menorX2 = Math.min(a.x2, b.x2);
+
+  const maiorY1 = Math.max(a.y1, b.y1);
+  const menorY2 = Math.min(a.y2, b.y2);
+
+  const areaIntersecao = Math.max(0, menorX2 - maiorX1) * Math.max(0, menorY2 - maiorY1);
+
+  // união
+  const uniao = areaA - areaIntersecao + areaB;
+
+  if (uniao <= 0){
+    return 0;
+  }
+
+  return areaIntersecao / uniao;
 }
 
 // Permite importar a função nos testes (Node); no navegador, `iou` fica global.
