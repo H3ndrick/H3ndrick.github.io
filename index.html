@@ -247,6 +247,84 @@
             <a href="https://github.com/H3ndrick/agroguard-api" target="_blank" rel="noopener">api</a>
             <a href="https://github.com/gugah-com-h/AgroGuardAI" target="_blank" rel="noopener">frontend</a>
           </p>
+
+          <!-- Trípticos montados a partir da gravação do app no celular (sem a localização real do usuário). -->
+          <figure class="shot" aria-label="Telas do AgroGuard no celular, com anotações">
+            <div class="shot__bar mono">
+              <span class="shot__file">agroguard/fluxo</span>
+              <span class="shot__nav">
+                <button type="button" class="shot__btn" data-step="-1" aria-label="Imagem anterior">◂</button>
+                <span class="shot__count">0001 / 0007</span>
+                <button type="button" class="shot__btn" data-step="1" aria-label="Próxima imagem">▸</button>
+              </span>
+              <button type="button" class="shot__toggle" aria-pressed="true">anotações</button>
+            </div>
+            <div class="shot__frame">
+              <div class="shot__item" data-file="agroguard/fluxo">
+                <img src="img/agroguard-1-fluxo.webp" width="1440" height="900" loading="lazy"
+                     alt="Abertura, escolha da localização e confirmação do ponto no mapa">
+                <div class="ann ann--group ann--out" style="--l:6.53; --t:6.22; --w:25.62; --h:88.89" data-label="abertura"></div>
+                <div class="ann ann--group ann--out" style="--l:37.15; --t:6.22; --w:25.62; --h:88.89" data-label="localização"></div>
+                <div class="ann ann--group ann--out" style="--l:67.78; --t:6.22; --w:25.62; --h:88.89" data-label="confirmação · mapa"></div>
+              </div>
+              <div class="shot__item" data-file="agroguard/risco-por-municipio" hidden>
+                <img src="img/agroguard-2-risco.webp" width="1440" height="900" loading="lazy"
+                     alt="Mapa de calor de queimadas e nível de perigo em Araraquara (alto), Baianópolis (crítico) e Tapurah (baixo)">
+                <div class="ann ann--group ann--out" style="--l:6.53; --t:6.22; --w:25.62; --h:88.89" data-label="Araraquara-SP · alto"></div>
+                <div class="ann ann--out" style="--l:7.63; --t:80.62; --w:23.43; --h:5.23" data-label="nível de perigo"></div>
+                <div class="ann ann--group ann--out" style="--l:37.15; --t:6.22; --w:25.62; --h:88.89" data-label="Baianópolis-BA · crítico"></div>
+                <div class="ann" style="--l:42.16; --t:36.78; --w:14.46; --h:23.15" data-label="focos de calor · INPE"></div>
+                <div class="ann ann--out" style="--l:38.25; --t:80.62; --w:23.43; --h:5.23" data-label="nível de perigo"></div>
+                <div class="ann ann--group ann--out" style="--l:67.78; --t:6.22; --w:25.62; --h:88.89" data-label="Tapurah-MT · baixo"></div>
+                <div class="ann ann--out" style="--l:68.88; --t:80.62; --w:23.43; --h:5.23" data-label="nível de perigo"></div>
+              </div>
+              <div class="shot__item" data-file="agroguard/scores" hidden>
+                <img src="img/agroguard-3-scores.webp" width="1440" height="900" loading="lazy"
+                     alt="Scores de risco, fogo, clima, agricultura e ZARC calculados para os três municípios, com os dados usados no cálculo">
+                <div class="ann ann--group ann--out" style="--l:6.53; --t:6.22; --w:25.62; --h:88.89" data-label="Araraquara-SP"></div>
+                <div class="ann ann--out" style="--l:7.34; --t:33.44; --w:22.13; --h:8.43" data-label="scores 0–100"></div>
+                <div class="ann ann--group ann--out" style="--l:37.15; --t:6.22; --w:25.62; --h:88.89" data-label="Baianópolis-BA"></div>
+                <div class="ann ann--out" style="--l:37.96; --t:33.44; --w:22.13; --h:8.43" data-label="scores 0–100"></div>
+                <div class="ann" style="--l:38.05; --t:43.72; --w:23.77; --h:36.11" data-label="dados abertos"></div>
+                <div class="ann ann--group ann--out" style="--l:67.78; --t:6.22; --w:25.62; --h:88.89" data-label="Tapurah-MT"></div>
+                <div class="ann ann--out" style="--l:68.59; --t:33.44; --w:22.13; --h:8.43" data-label="scores 0–100"></div>
+              </div>
+              <div class="shot__item" data-file="agroguard/assistente" hidden>
+                <img src="img/agroguard-4-assistente.webp" width="1440" height="900" loading="lazy"
+                     alt="Assistente de IA: pergunta sobre o plantio de mandioca, resposta baseada nos dados e recomendação">
+                <div class="ann ann--group ann--out" style="--l:6.53; --t:6.22; --w:25.62; --h:88.89" data-label="pergunta"></div>
+                <div class="ann ann--out" style="--l:7.19; --t:82.15; --w:20.68; --h:12.27" data-label="pergunta livre"></div>
+                <div class="ann ann--group ann--out" style="--l:37.15; --t:6.22; --w:25.62; --h:88.89" data-label="resposta · LLM"></div>
+                <div class="ann" style="--l:38.25; --t:47.89; --w:22.56; --h:40.28" data-label="explica com os dados"></div>
+                <div class="ann ann--group ann--out" style="--l:67.78; --t:6.22; --w:25.62; --h:88.89" data-label="recomendação"></div>
+              </div>
+              <div class="shot__item" data-file="agroguard/desktop · localizacao" hidden>
+                <img src="img/agroguard-5-desktop-form.webp" width="1440" height="900" loading="lazy"
+                     alt="AgroGuard no desktop: escolha do estado SP e do município Araraquara">
+                <div class="ann ann--out" style="--l:6.94; --t:36.4; --w:36.1; --h:5.2" data-label="UF"></div>
+                <div class="ann ann--out" style="--l:6.94; --t:46.8; --w:36.1; --h:5.2" data-label="município · IBGE"></div>
+                <div class="ann" style="--l:6.94; --t:61; --w:36.1; --h:5.1" data-label="geolocalização"></div>
+              </div>
+              <div class="shot__item" data-file="agroguard/desktop · mapa" hidden>
+                <img src="img/agroguard-6-desktop-mapa.webp" width="1440" height="900" loading="lazy"
+                     alt="AgroGuard no desktop: mapa de calor de Araraquara com nível de perigo baixo e painel do assistente com scores e análise">
+                <div class="ann ann--out" style="--l:35.1; --t:45.2; --w:2.1; --h:5" data-label="propriedade"></div>
+                <div class="ann" style="--l:33.5; --t:55.2; --w:5.9; --h:7.2" data-label="focos · INPE"></div>
+                <div class="ann ann--out" style="--l:23.1; --t:90; --w:26.1; --h:6.4" data-label="nível de perigo"></div>
+                <div class="ann ann--out" style="--l:73; --t:7.4; --w:23.6; --h:9.2" data-label="scores 0–100"></div>
+                <div class="ann" style="--l:73.3; --t:22.2; --w:21.8; --h:69" data-label="análise · LLM"></div>
+              </div>
+              <div class="shot__item" data-file="agroguard/desktop · dados" hidden>
+                <img src="img/agroguard-7-desktop-dados.webp" width="1440" height="900" loading="lazy"
+                     alt="AgroGuard no desktop: dados usados no cálculo, com fogo, clima, agricultura e aptidão ZARC">
+                <div class="ann" style="--l:73; --t:22.2; --w:26.3; --h:11.9" data-label="fogo · INPE"></div>
+                <div class="ann" style="--l:73; --t:35.1; --w:26.3; --h:5.7" data-label="clima"></div>
+                <div class="ann" style="--l:73; --t:41.9; --w:26.3; --h:11.8" data-label="agricultura · seguro rural"></div>
+                <div class="ann" style="--l:73; --t:54.7; --w:26.3; --h:7.9" data-label="aptidão · ZARC"></div>
+              </div>
+              <div class="shot__scan" aria-hidden="true"></div>
+            </div>
+          </figure>
         </li>
 
         <li class="proj" data-det="projeto">
