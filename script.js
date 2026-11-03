@@ -242,7 +242,8 @@
         if (en.isIntersecting) links.forEach((a) => a.classList.toggle('on', a.hash === '#' + en.target.id));
       });
     }, { rootMargin: '-40% 0px -55% 0px' });
-    links.forEach((a) => { const s = $(a.hash); if (s) spy.observe(s); });
+    // observa todas as seções: nas que não têm link no menu (ex.: Formação), nenhum link fica ativo
+    $$('main > section[id]').forEach((s) => spy.observe(s));
   } else {
     blocks.forEach((b) => b.classList.add('seen'));
   }
