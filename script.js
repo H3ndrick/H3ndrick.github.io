@@ -271,6 +271,14 @@
     const show = (i) => {
       idx = (i + items.length) % items.length;
       items.forEach((it, k) => { it.hidden = k !== idx; });
+      // vídeo: só toca o frame ativo; com "reduzir movimento", mostra controles e não dá autoplay
+      items.forEach((it, k) => {
+        const v = $('video', it);
+        if (!v) return;
+        if (k !== idx) { v.pause(); return; }
+        if (reduceMotion) { v.controls = true; return; }
+        v.play().catch(() => { v.controls = true; });
+      });
       file.textContent = items[idx].dataset.file;
       count.textContent = `${fmt(idx + 1)} / ${fmt(items.length)}`;
       reveal();

@@ -5,6 +5,7 @@
 <iframe id="b" src="index.html" width="1200" height="660"></iframe>
 <iframe id="c" src="index.html" width="1200" height="660"></iframe>
 <script>
+  const info = {};
   const go = (id, steps) => {
     const f = document.getElementById(id);
     f.addEventListener('load', () => {
@@ -14,8 +15,13 @@
       const s = d.querySelector('.shot');
       w.scrollTo(0, s.getBoundingClientRect().top + w.scrollY - 70);
       setTimeout(() => { for (let i = 0; i < steps; i++) s.querySelector('.shot__btn[data-step="1"]').click(); }, 400);
+      setTimeout(() => {
+        const v = s.querySelector('video');
+        info[id] = `${s.querySelector('.shot__count').textContent} paused=${v.paused} t=${v.currentTime.toFixed(1)}`;
+        document.title = JSON.stringify(info);
+      }, 3500);
     });
   };
-  go('a', 1); go('b', 2); go('c', 5);
+  go('a', 0); go('b', 7); go('c', 8);
 </script>
 </body></html>

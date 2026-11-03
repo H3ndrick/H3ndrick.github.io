@@ -209,6 +209,12 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
 .shot__item[hidden] { display: none; }
 .shot__item img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.75); transition: filter .3s; }
 .shot:hover .shot__item img { filter: none; }
+.shot__item video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.shot__rec {
+  position: absolute; top: 10px; right: 12px; font-size: .68rem; color: #fff;
+  background: #000a; padding: 3px 7px; letter-spacing: .06em;
+}
+.shot__rec::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; background: var(--det-bad); vertical-align: 0; animation: blink 1.6s steps(2, start) infinite; }
 
 /* caixas de anotação */
 .ann {
@@ -223,6 +229,7 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
 }
 .ann--group { border-style: dashed; }
 .ann--out::after { top: auto; bottom: 100%; }   /* rótulo por fora, para não cobrir texto */
+.ann--below::after { top: 100%; }                /* rótulo embaixo (caixas coladas no topo) */
 .ann:hover { background: color-mix(in srgb, var(--det-ok) 14%, transparent); }
 .shot.annotated .ann.on { opacity: 1; transform: none; }
 

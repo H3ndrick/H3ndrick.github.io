@@ -152,19 +152,25 @@
           <!-- Quadros extraídos da gravação do fluxo completo (endereço desfocado). -->
           <figure class="shot" aria-label="Quadros do CompletAi em funcionamento, com anotações">
             <div class="shot__bar mono">
-              <span class="shot__file">completai/inicio</span>
+              <span class="shot__file">completai/fluxo.mp4</span>
               <span class="shot__nav">
                 <button type="button" class="shot__btn" data-step="-1" aria-label="Imagem anterior">◂</button>
-                <span class="shot__count">0001 / 0006</span>
+                <span class="shot__count">0001 / 0009</span>
                 <button type="button" class="shot__btn" data-step="1" aria-label="Próxima imagem">▸</button>
               </span>
               <button type="button" class="shot__toggle" aria-pressed="true">anotações</button>
             </div>
             <div class="shot__frame">
-              <div class="shot__item" data-file="completai/inicio">
+              <div class="shot__item shot__item--video" data-file="completai/fluxo.mp4 · 1,5×">
+                <video src="img/completai-fluxo.mp4" poster="img/completai-fluxo-poster.webp"
+                       muted loop playsinline preload="none"
+                       aria-label="Trecho da gravação: a foto da despensa é capturada e o agente lista os ingredientes reconhecidos"></video>
+                <span class="shot__rec mono" aria-hidden="true">REC</span>
+              </div>
+              <div class="shot__item" data-file="completai/inicio" hidden>
                 <img src="img/completai-1-inicio.webp" width="1440" height="900" loading="lazy"
                      alt="Tela inicial do CompletAi: etapas do fluxo, conta iFood conectada e campo para descrever a despensa">
-                <div class="ann" style="--l:81.6; --t:3; --w:10.8; --h:4" data-label="OAuth · iFood"></div>
+                <div class="ann ann--below" style="--l:81.6; --t:3; --w:10.8; --h:4" data-label="OAuth · iFood"></div>
                 <div class="ann ann--out" style="--l:17; --t:12.8; --w:64.6; --h:4.2" data-label="fluxo em 4 etapas"></div>
                 <div class="ann" style="--l:6.6; --t:52.3; --w:63.3; --h:10.3" data-label="conta conectada"></div>
                 <div class="ann" style="--l:8.5; --t:75.9; --w:59.4; --h:16.1" data-label="entrada · texto"></div>
@@ -206,6 +212,21 @@
                 <div class="ann ann--out" style="--l:17; --t:13; --w:66; --h:4.2" data-label="etapa 4/4"></div>
                 <div class="ann ann--out" style="--l:6.6; --t:30.4; --w:63.3; --h:11.7" data-label="resposta · MCP iFood"></div>
                 <div class="ann ann--out" style="--l:8.1; --t:59; --w:60.3; --h:14.7" data-label="totais do iFood"></div>
+              </div>
+              <div class="shot__item" data-file="completai/inicio · tema claro" hidden>
+                <img src="img/completai-7-claro.webp" width="1440" height="900" loading="lazy"
+                     alt="Tela inicial do CompletAi no tema claro, com o painel para conectar a conta iFood">
+                <div class="ann ann--below" style="--l:80.4; --t:2.3; --w:12.4; --h:5.5" data-label="OAuth · iFood"></div>
+                <div class="ann ann--out" style="--l:17.7; --t:12.9; --w:64.6; --h:3.9" data-label="fluxo em 4 etapas"></div>
+                <div class="ann ann--out" style="--l:7.2; --t:52.4; --w:63.1; --h:16.4" data-label="login OAuth · PKCE"></div>
+                <div class="ann ann--out" style="--l:9; --t:82.1; --w:59.4; --h:16" data-label="entrada · texto"></div>
+              </div>
+              <div class="shot__item" data-file="completai/camera · tema claro" hidden>
+                <img src="img/completai-8-camera-off.webp" width="1440" height="900" loading="lazy"
+                     alt="Modal da câmera no tema claro avisando que a câmera foi desligada ao sair da aba">
+                <div class="ann ann--group ann--out" style="--l:27.5; --t:12.7; --w:45; --h:85" data-label="entrada · câmera"></div>
+                <div class="ann" style="--l:29.3; --t:28.3; --w:41.4; --h:49.8" data-label="câmera · sem sinal"></div>
+                <div class="ann ann--out" style="--l:29.3; --t:79.9; --w:41.4; --h:7.6" data-label="erro tratado"></div>
               </div>
               <div class="shot__scan" aria-hidden="true"></div>
             </div>
