@@ -157,7 +157,8 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
 .job__list li::before { counter-increment: j; content: counter(j, decimal-leading-zero); font: 400 .75rem/2.1 var(--mono); color: var(--ink-2); }
 
 /* projetos */
-.projects { display: grid; }
+.projects { display: grid; grid-template-columns: minmax(0, 1fr); }
+.proj, .proj > * { min-width: 0; }   /* o visualizador não pode alargar a coluna */
 .proj {
   position: relative; padding: 28px 24px 28px 0;
   border-top: 1px solid var(--rule);
@@ -192,7 +193,7 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
 
 /* ---------- prints dos projetos (dataset anotado) ---------- */
 .shot { margin-top: 18px; border: 1px solid var(--ink); background: var(--cam-bg); color: var(--cam-ink); position: relative; z-index: 1; }
-.shot__bar { display: flex; align-items: center; gap: 14px; padding: 7px 10px; font-size: .72rem; border-bottom: 1px solid #ffffff14; }
+.shot__bar { display: flex; align-items: center; gap: 14px; padding: 7px 10px; font-size: .72rem; border-bottom: 1px solid #ffffff14; min-width: 0; }
 .shot__file { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .shot__file::before { content: "IMG · "; opacity: .6; }
 .shot__count, .shot__toggle { white-space: nowrap; }
@@ -315,4 +316,6 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
   .shot__file::before { content: ""; }
   .shot__bar { gap: 8px; font-size: .66rem; padding: 6px 8px; }
   .shot__btn, .shot__toggle { padding: 2px 5px; }
+  .shot__toggle { font-size: 0; }                       /* só o quadradinho no celular */
+  .shot__toggle::before { margin-right: 0; width: 10px; height: 10px; }
 }
