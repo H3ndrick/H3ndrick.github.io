@@ -1,4 +1,4 @@
-// Testes da função iou() — rode na raiz do projeto com:  node --test tests/
+// Testes da função iou() — rode na raiz do projeto com:  node --test tests/iou.test.mjs
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import mod from '../js/iou.js';

@@ -42,7 +42,7 @@ Jogo de anotação: o visitante desenha uma caixa e recebe o IoU com a caixa de 
 
 - **Interface e rodadas:** `js/game.js`, feito com apoio de IA. As caixas de referência ficam em `ROUNDS`, em % da imagem.
 - **Métrica:** `js/iou.js`, a implementar (TODO). O contrato está documentado no próprio arquivo.
-- **Testes:** `node --test tests/`, na raiz do projeto. Precisa do Node: no WSL ele ainda não está instalado; dá para rodar pelo PowerShell do Windows (`cd \\wsl.localhost\Ubuntu\home\hendrick\projetos\portfolio`) ou instalar o Node no WSL via nvm.
+- **Testes:** `node --test tests/iou.test.mjs`, na raiz do projeto. Precisa do Node: no WSL ele ainda não está instalado; dá para rodar pelo PowerShell do Windows (`cd \\wsl.localhost\Ubuntu\home\hendrick\projetos\portfolio`) ou instalar o Node no WSL via nvm.
 
 Planejamento dos próximos recursos: `docs/PLANEJAMENTO.md`.
 

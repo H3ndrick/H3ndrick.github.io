@@ -129,7 +129,7 @@
       return;
     }
     if (!Number.isFinite(v) || v < 0 || v > 1) {
-      msg.textContent = `iou() retornou um valor inválido (${v}). Rode os testes: node --test tests/`;
+      msg.textContent = `iou() retornou um valor inválido (${v}). Rode os testes: node --test tests/iou.test.mjs`;
       return;
     }
     locked = true;
