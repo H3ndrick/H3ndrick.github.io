@@ -217,6 +217,7 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
 
 /* ---------- modo detecção ---------- */
 .det-layer { position: absolute; left: 0; top: 0; width: 100%; pointer-events: none; z-index: 30; }
+.det-layer--fixed { position: fixed; height: 100%; z-index: 45; }
 .det {
   position: absolute; border: 1.5px solid var(--c); background: color-mix(in srgb, var(--c) 6%, transparent);
   animation: det-in .35s ease-out both;
@@ -225,6 +226,7 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
   position: absolute; left: -1.5px; bottom: 100%; white-space: nowrap;
   font: 500 10.5px/1 var(--mono); padding: 4px 5px; background: var(--c); color: var(--det-text);
 }
+.det--inside > span { bottom: auto; top: -1.5px; left: 100%; }
 @keyframes det-in { from { opacity: 0; transform: scale(1.04); } }
 .det-hud {
   position: fixed; left: 16px; bottom: 16px; z-index: 45; margin: 0;

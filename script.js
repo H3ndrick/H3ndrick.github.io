@@ -162,20 +162,31 @@
     return (0.81 + (h % 180) / 1000).toFixed(2);
   };
 
+  // Elementos dentro do cabeçalho fixo vão para uma camada fixa (coordenadas da tela);
+  // o resto vai para a camada do documento (coordenadas da página).
+  const detFixed = document.createElement('div');
+  detFixed.className = 'det-layer det-layer--fixed';
+  detFixed.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(detFixed);
+  const STICKY = '.top';
+
   const drawDetections = () => {
     detLayer.innerHTML = '';
+    detFixed.innerHTML = '';
     detLayer.style.height = document.documentElement.scrollHeight + 'px';
     const targets = $$('[data-det]').filter((el) => el.offsetParent !== null);
     targets.forEach((el, i) => {
       const cls = el.dataset.det;
       if (!classColor[cls]) classColor[cls] = palette[Object.keys(classColor).length % palette.length];
       const r = el.getBoundingClientRect();
+      const fixed = !!el.closest(STICKY);
+      const ox = fixed ? 0 : window.scrollX, oy = fixed ? 0 : window.scrollY;
       const d = document.createElement('div');
-      d.className = 'det';
+      d.className = 'det' + (r.top + oy - 6 < 20 ? ' det--inside' : '');
       d.style.setProperty('--c', classColor[cls]);
       Object.assign(d.style, {
-        left: r.left + window.scrollX - 6 + 'px',
-        top: r.top + window.scrollY - 6 + 'px',
+        left: r.left + ox - 6 + 'px',
+        top: r.top + oy - 6 + 'px',
         width: r.width + 12 + 'px',
         height: r.height + 12 + 'px',
         animationDelay: reduceMotion ? '0s' : i * 40 + 'ms',
@@ -183,7 +194,7 @@
       const tag = document.createElement('span');
       tag.textContent = `${cls} ${conf(el.textContent + cls)}`;
       d.appendChild(tag);
-      detLayer.appendChild(d);
+      (fixed ? detFixed : detLayer).appendChild(d);
     });
     const classes = new Set(targets.map((t) => t.dataset.det)).size;
     hud.textContent = `${targets.length} objetos · ${classes} classes · D para desligar`;
@@ -193,7 +204,7 @@
     detOn = on;
     detBtn.setAttribute('aria-pressed', String(on));
     hud.classList.toggle('on', on);
-    if (on) drawDetections(); else detLayer.innerHTML = '';
+    if (on) drawDetections(); else { detLayer.innerHTML = ''; detFixed.innerHTML = ''; }
   };
   detBtn.addEventListener('click', () => setDetect(!detOn));
   document.addEventListener('keydown', (e) => {
