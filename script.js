@@ -7,9 +7,7 @@
   /* ---------- tema ---------- */
   const themeBtn = $('#theme-toggle');
   const themeLabel = $('#theme-label');
-  const isDark = () => root.dataset.theme
-    ? root.dataset.theme === 'dark'
-    : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = () => root.dataset.theme === 'dark';
   const syncThemeLabel = () => { themeLabel.textContent = isDark() ? 'claro' : 'escuro'; };
   syncThemeLabel();
   themeBtn.addEventListener('click', () => {
@@ -28,84 +26,132 @@
   };
   tick(); setInterval(tick, 1000);
 
-  /* ---------- ROI: desenhar caixas com tamanho mínimo ---------- */
+  /* ---------- câmera: detecções, falso alerta e ROI-OFF ----------
+     Tudo em % do quadro, para acompanhar o redimensionamento.
+     Uma ROI-OFF faz o "modelo" ignorar as detecções cujo centro cai dentro dela. */
   const frame = $('#cam-frame');
   const layer = $('#cam-layer');
   const cross = $('#cam-cross');
-  const MIN = 48;                       // tamanho mínimo, em px de tela
-  $('#cam-min').textContent = MIN + 'px';
-  let count = 0, start = null, box = null;
+  const alerts = document.createElement('p');
+  alerts.className = 'cam__alerts mono';
+  frame.appendChild(alerts);
 
-  const local = (e) => {
-    const r = frame.getBoundingClientRect();
-    return {
-      x: Math.max(0, Math.min(r.width, e.clientX - r.left)),
-      y: Math.max(0, Math.min(r.height, e.clientY - r.top)),
-    };
-  };
-  const place = (el, a, b) => {
-    const x = Math.min(a.x, b.x), y = Math.min(a.y, b.y);
-    const w = Math.abs(a.x - b.x), h = Math.abs(a.y - b.y);
-    Object.assign(el.style, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' });
-    return { w: Math.round(w), h: Math.round(h) };
-  };
-  const makeRoi = (labelText) => {
+  const DETECTIONS = [
+    { kind: 'ok',  label: 'pessoa 0.93', l: 27,   t: 51.5, w: 5.5,  h: 17 },
+    { kind: 'ok',  label: 'carro 0.95',  l: 61.5, t: 52,   w: 12.5, h: 13 },
+    { kind: 'bad', label: 'pessoa 0.58', l: 11,   t: 70.5, w: 15.5, h: 12.5 },
+  ];
+  // menor área que cobre o falso alerta (o que a ferramenta sugeriria)
+  const SUGGESTION = { l: 10.5, t: 70, w: 16.5, h: 13.5 };
+
+  let offCount = 0, start = null, box = null;
+  const area = (r) => (r.w * r.h / 100).toFixed(1);
+
+  const makeBox = (cls, label, r) => {
     const el = document.createElement('div');
-    el.className = 'roi';
+    el.className = 'bx ' + cls;
     const tag = document.createElement('span');
-    tag.textContent = labelText;
+    tag.textContent = label;
     el.appendChild(tag);
+    setRect(el, r);
     layer.appendChild(el);
     return el;
   };
+  function setRect(el, r) {
+    Object.assign(el.style, { left: r.l + '%', top: r.t + '%', width: r.w + '%', height: r.h + '%' });
+    el._r = r;
+  }
+
+  const applyRoiOff = () => {
+    const offs = $$('.bx--off:not(.bx--suggest)', layer).map((o) => o._r);
+    $$('.bx--ok, .bx--bad', layer).forEach((d) => {
+      const r = d._r, cx = r.l + r.w / 2, cy = r.t + r.h / 2;
+      const hidden = offs.some((o) => cx >= o.l && cx <= o.l + o.w && cy >= o.t && cy <= o.t + o.h);
+      d.classList.toggle('ignored', hidden);
+    });
+    const n = $$('.bx--bad:not(.ignored)', layer).length;
+    alerts.innerHTML = `falsos alertas: <b>${n}</b>`;
+    alerts.classList.toggle('clear', n === 0);
+  };
+
+  const buildScene = () => {
+    layer.innerHTML = '';
+    offCount = 0;
+    DETECTIONS.forEach((d) => makeBox('bx--' + d.kind, d.label, d));
+    const sug = makeBox('bx--off bx--suggest', `roi-off sugerida · ${area(SUGGESTION)}% do quadro`, SUGGESTION);
+    const actions = document.createElement('div');
+    actions.className = 'cam__actions';
+    Object.assign(actions.style, { left: SUGGESTION.l + '%', top: `calc(${SUGGESTION.t + SUGGESTION.h}% + 5px)` });
+    const approve = document.createElement('button');
+    approve.type = 'button'; approve.textContent = 'aprovar';
+    const discard = document.createElement('button');
+    discard.type = 'button'; discard.textContent = 'descartar';
+    const note = document.createElement('span');
+    note.textContent = `roi-off sugerida · ${area(SUGGESTION)}%`;
+    actions.append(note, approve, discard);
+    layer.appendChild(actions);
+    approve.addEventListener('click', () => {
+      sug.classList.remove('bx--suggest');
+      sug.firstChild.textContent = `roi-off aprovada · ${area(SUGGESTION)}%`;
+      actions.remove();
+      applyRoiOff();
+    });
+    discard.addEventListener('click', () => { sug.remove(); actions.remove(); });
+    applyRoiOff();
+  };
+  buildScene();
+  $('#cam-clear').addEventListener('click', buildScene);
+
+  // desenhar ROI-OFFs à mão (sem tamanho mínimo)
+  const local = (e) => {
+    const r = frame.getBoundingClientRect();
+    return {
+      x: Math.max(0, Math.min(100, (e.clientX - r.left) / r.width * 100)),
+      y: Math.max(0, Math.min(100, (e.clientY - r.top) / r.height * 100)),
+      px: r,
+    };
+  };
+  const rectFrom = (a, b) => ({
+    l: Math.min(a.x, b.x), t: Math.min(a.y, b.y), w: Math.abs(a.x - b.x), h: Math.abs(a.y - b.y),
+  });
 
   frame.addEventListener('pointerdown', (e) => {
-    if (e.button !== 0) return;
+    if (e.button !== 0 || e.target.closest('button')) return;
     frame.setPointerCapture(e.pointerId);
     start = local(e);
-    box = makeRoi('');
-    box.classList.add('drawing');
-    place(box, start, start);
+    box = makeBox('bx--off drawing', '', rectFrom(start, start));
   });
   frame.addEventListener('pointermove', (e) => {
     const p = local(e);
-    cross.textContent = `x ${Math.round(p.x)}  y ${Math.round(p.y)}`;
+    cross.textContent = `x ${Math.round(p.x / 100 * p.px.width)}  y ${Math.round(p.y / 100 * p.px.height)}`;
     if (!box) return;
-    const { w, h } = place(box, start, p);
-    const ok = w >= MIN && h >= MIN;
-    box.classList.toggle('bad', !ok);
-    box.firstChild.textContent = `${w}×${h}${ok ? '' : ' < mín'}`;
+    const r = rectFrom(start, p);
+    setRect(box, r);
+    box.firstChild.textContent = `${area(r)}% do quadro`;
   });
   const finish = (e) => {
     if (!box) return;
-    const { w, h } = place(box, start, local(e));
+    const r = rectFrom(start, local(e));
     box.classList.remove('drawing');
-    if (w < 6 || h < 6) { box.remove(); }
-    else if (w < MIN || h < MIN) {
-      box.firstChild.textContent = `rejeitada · ${w}×${h}`;
-      box.classList.add('bad', 'fade');
-      const dead = box;
-      setTimeout(() => dead.remove(), 1300);
+    if (r.w < 1 || r.h < 1) {
+      box.remove();             // foi só um clique
     } else {
-      count += 1;
-      box.firstChild.textContent = `roi_${pad(count)} · ${w}×${h}`;
+      setRect(box, r);
+      offCount += 1;
+      box.firstChild.textContent = `roi-off_${pad(offCount)} · ${area(r)}%`;
+      applyRoiOff();
     }
     box = null; start = null;
   };
   frame.addEventListener('pointerup', finish);
   frame.addEventListener('pointercancel', finish);
   frame.addEventListener('pointerleave', () => { if (!box) cross.textContent = ''; });
-  $('#cam-clear').addEventListener('click', () => { layer.innerHTML = ''; count = 0; });
-
-  // ROI de exemplo, em porcentagem para acompanhar o redimensionamento
-  const demo = makeRoi('roi_00 · exemplo');
-  Object.assign(demo.style, { left: '60%', top: '50%', width: '18%', height: '19%' });
 
   /* ---------- modo detecção ---------- */
   const detBtn = $('#detect-toggle');
   const detLayer = $('#det-layer');
   const hud = $('#det-hud');
-  const palette = ['var(--mark)', '#2f7d6d', '#3b5bdb', '#b5179e', '#c08a00'];
+  const palette = ['var(--p1)', 'var(--p2)', 'var(--p3)', 'var(--p4)', 'var(--p5)'];
   const classColor = {};
   let detOn = false;
 

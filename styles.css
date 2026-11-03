@@ -9,35 +9,31 @@
   --mark-ink: #ffffff;
   --cam-bg: #1b1a18;
   --cam-ink: #bdb6a8;
+  /* cores do quadro de câmera */
+  --det-ok: #4aa8ff;     /* detecção correta */
+  --det-bad: #ff4d4d;    /* falso alerta */
+  --roi-off: #d9d2c4;    /* área ignorada */
+  /* classes do modo detecção */
+  --p1: var(--mark); --p2: #2f7d6d; --p3: #3b5bdb; --p4: #b5179e; --p5: #a87600;
+  --det-text: #ffffff;
   --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
   --sans: "IBM Plex Sans", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #141311;
-    --paper-2: #1c1b18;
-    --ink: #ece7dc;
-    --ink-2: #a39c8f;
-    --rule: #34312b;
-    --mark: #ff6a3d;
-    --mark-ink: #141311;
-    --cam-bg: #0c0b0a;
-    --cam-ink: #8f897e;
-    color-scheme: dark;
-  }
-}
+/* O tema claro é o padrão; o escuro só entra pelo botão. */
 :root[data-theme="dark"] {
-  --paper: #141311;
-  --paper-2: #1c1b18;
-  --ink: #ece7dc;
-  --ink-2: #a39c8f;
-  --rule: #34312b;
-  --mark: #ff6a3d;
-  --mark-ink: #141311;
-  --cam-bg: #0c0b0a;
-  --cam-ink: #8f897e;
+  --paper: #111214;
+  --paper-2: #18191c;
+  --ink: #e6e6e3;
+  --ink-2: #9a9ca1;
+  --rule: #2a2c30;
+  --mark: #5fd0bd;
+  --mark-ink: #0e1a18;
+  --cam-bg: #0a0b0c;
+  --cam-ink: #8d9096;
+  --p1: var(--mark); --p2: #f2c14e; --p3: #8fb3ff; --p4: #f28fd1; --p5: #b4e06b;
+  --det-text: #111214;
   color-scheme: dark;
 }
 
@@ -110,15 +106,35 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
 .cam__frame { position: relative; aspect-ratio: 4 / 3; cursor: crosshair; touch-action: none; user-select: none; overflow: hidden; }
 .cam__scene, .cam__scene svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .cam__layer { position: absolute; inset: 0; }
-.roi { position: absolute; border: 1.5px solid var(--mark); background: color-mix(in srgb, var(--mark) 10%, transparent); }
-.roi > span {
-  position: absolute; left: -1.5px; top: -19px; white-space: nowrap;
-  font: 500 10.5px/1 var(--mono); padding: 4px 5px; background: var(--mark); color: #fff;
+/* caixas dentro do quadro (posições em %) */
+.bx { position: absolute; border: 1.5px solid var(--c); transition: opacity .35s; }
+.bx > span {
+  position: absolute; left: -1.5px; bottom: 100%; white-space: nowrap;
+  font: 500 10px/1 var(--mono); padding: 3px 5px; background: var(--c); color: #0b0b0b;
 }
-.roi.bad { border-style: dashed; border-color: #d9d2c4; background: transparent; }
-.roi.bad > span { background: #d9d2c4; color: #1b1a18; }
-.roi.drawing { border-style: dashed; }
-.roi.fade { opacity: 0; transition: opacity .5s .6s; }
+.bx--ok  { --c: var(--det-ok); }
+.bx--bad { --c: var(--det-bad); animation: alert 1.2s ease-in-out infinite; }
+@keyframes alert { 50% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--det-bad) 35%, transparent); } }
+.bx.ignored { opacity: 0; }
+/* ROI-OFF: área que o modelo deve ignorar */
+.bx--off {
+  --c: var(--roi-off);
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--roi-off) 22%, transparent) 0 2px, transparent 2px 7px);
+}
+.bx--suggest { border-style: dashed; background: none; }
+.bx--suggest > span { display: none; }
+.bx.drawing { border-style: dashed; }
+.cam__actions { position: absolute; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+.cam__actions > span { font: 500 10px/1 var(--mono); color: var(--roi-off); margin-right: 4px; }
+.cam__actions button {
+  font: 500 10px/1 var(--mono); padding: 5px 7px; cursor: pointer;
+  border: 1px solid var(--roi-off); background: var(--cam-bg); color: var(--roi-off);
+}
+.cam__actions button:first-of-type { background: var(--roi-off); color: #111; }
+.cam__actions button:hover { filter: brightness(1.15); }
+.cam__alerts { position: absolute; left: 8px; top: 6px; margin: 0; font-size: .68rem; pointer-events: none; }
+.cam__alerts b { color: var(--det-bad); font-weight: 500; }
+.cam__alerts.clear b { color: var(--det-ok); }
 .cam__cross { position: absolute; right: 8px; bottom: 6px; font-size: .68rem; opacity: .8; pointer-events: none; }
 .cam__caption { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
   padding: 10px 12px; font-size: .8rem; line-height: 1.45; color: var(--cam-ink); border-top: 1px solid #ffffff14; }
@@ -207,7 +223,7 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
 }
 .det > span {
   position: absolute; left: -1.5px; bottom: 100%; white-space: nowrap;
-  font: 500 10.5px/1 var(--mono); padding: 4px 5px; background: var(--c); color: #fff;
+  font: 500 10.5px/1 var(--mono); padding: 4px 5px; background: var(--c); color: var(--det-text);
 }
 @keyframes det-in { from { opacity: 0; transform: scale(1.04); } }
 .det-hud {

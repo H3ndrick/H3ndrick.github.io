@@ -45,11 +45,12 @@
     <!-- ABERTURA -->
     <section class="intro wrap">
       <div class="intro__text">
-        <p class="meta">Researcher @ CEIA-UFG &nbsp;/&nbsp; ADS @ IFSP Araraquara</p>
+        <p class="meta">Researcher (CEIA-UFG) @ Noleak Defence &nbsp;/&nbsp; ADS @ IFSP Araraquara</p>
         <h1 data-det="pessoa">Hendrick<br><em>Ascendino</em></h1>
         <p class="intro__lead" data-det="resumo">
-          Sou desenvolvedor e trabalho com <mark>visão computacional</mark> e <mark>LLMs</mark>
-          no Centro de Excelência em Inteligência Artificial da UFG. No dia a dia isso significa
+          Sou desenvolvedor e pesquisador pelo Centro de Excelência em Inteligência Artificial
+          da UFG, atuando no P&amp;D da Noleak Defence com <mark>visão computacional</mark> e
+          <mark>LLMs</mark>. No dia a dia isso significa
           anotar e curar datasets de imagens, escrever documentação para agentes de IA, manter
           pipelines de CI/CD e construir ferramentas internas que outras pessoas usam.
         </p>
@@ -66,7 +67,7 @@
           <span id="cam-clock">00:00:00</span>
         </div>
         <div class="cam__frame" id="cam-frame" role="application"
-             aria-label="Área de desenho: arraste para marcar uma região de interesse">
+             aria-label="Simulação de câmera: aprove a ROI-OFF sugerida ou arraste para desenhar uma">
           <div class="cam__scene" aria-hidden="true">
             <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
               <defs>
@@ -80,6 +81,11 @@
                 <path d="M0 300 L170 120 M400 300 L230 120 M170 120 H230"/>
                 <path d="M60 300 L182 140 M340 300 L218 140" stroke-dasharray="6 6" opacity=".6"/>
                 <path d="M0 120 H400" opacity=".35"/>
+              </g>
+              <!-- sombra que o modelo confunde com uma pessoa -->
+              <g fill="currentColor" opacity=".32">
+                <ellipse cx="74" cy="238" rx="28" ry="9"/>
+                <path d="M62 236 q12 -22 26 -2 z"/>
               </g>
               <g fill="currentColor" opacity=".55">
                 <rect x="250" y="168" width="44" height="26" rx="4"/>
@@ -95,8 +101,8 @@
           <div class="cam__cross mono" id="cam-cross" aria-hidden="true"></div>
         </div>
         <figcaption class="cam__caption">
-          <span>Arraste para marcar uma ROI. Caixas menores que o mínimo (<span class="mono" id="cam-min">48px</span>) são rejeitadas, como na ferramenta que fiz no CEIA para gerar ROI-OFFs em câmeras.</span>
-          <button type="button" class="link-btn mono" id="cam-clear">limpar</button>
+          <span>Uma sombra virou “pessoa” e gerou um falso alerta. A ferramenta sugere a menor ROI-OFF que cobre o problema; aprove, ou arraste para desenhar a sua. O que fica dentro de uma ROI-OFF é ignorado pelo modelo.</span>
+          <button type="button" class="link-btn mono" id="cam-clear">reiniciar</button>
         </figcaption>
       </figure>
     </section>
@@ -109,14 +115,14 @@
           <header class="job__head">
             <div>
               <h3>Researcher</h3>
-              <p>Centro de Excelência em Inteligência Artificial (CEIA), UFG — projeto Noleak Defence</p>
+              <p>Pesquisador pelo CEIA-UFG (Centro de Excelência em Inteligência Artificial), no P&amp;D da <strong>Noleak Defence</strong></p>
             </div>
             <p class="mono job__date">set 2025 — hoje</p>
           </header>
           <ul class="job__list">
             <li>Anoto e faço curadoria de datasets de imagens usados para melhorar modelos de visão computacional.</li>
             <li>Escrevo documentação técnica e wikis pensadas para agentes de IA, que dão contexto ao desenvolvimento com agentes e RAG nos repositórios.</li>
-            <li>Desenvolvi uma aplicação interna que agiliza a geração de ROI-OFFs com tamanho mínimo nas câmeras.</li>
+            <li>Desenvolvi uma aplicação interna que sugere automaticamente ROI-OFFs mínimas nas câmeras: a menor área possível que cobre o que gera falsos alertas (sombras, objetos fora de contexto), para o modelo ignorar só o necessário. Cada sugestão passa por aprovação humana.</li>
             <li>Fiz a primeira versão de uma automação de saúde do sistema: dados dos servidores vão para o AnythingLLM e o Gemini faz a análise.</li>
             <li>Implementei e evoluí pipelines de CI/CD e testes automatizados.</li>
             <li>Desenvolvo funcionalidades, corrijo bugs e ajudo a evoluir sistemas internos.</li>

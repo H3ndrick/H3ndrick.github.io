@@ -23,7 +23,7 @@ Para editar textos, mexa só no `index.html`. Para trocar a cor de destaque, alt
 
 ### Detalhes interativos
 
-- **Quadro CAM-01** (topo): arraste para desenhar ROIs; caixas abaixo do mínimo (`MIN` em `script.js`) são rejeitadas.
+- **Quadro CAM-01** (topo): simula uma câmera com detecções e um falso alerta (sombra detectada como pessoa). A ROI-OFF mínima sugerida pode ser aprovada ou descartada, e o visitante pode desenhar as suas; detecções com o centro dentro de uma ROI-OFF são ignoradas. As caixas da cena ficam em `DETECTIONS` e `SUGGESTION` no `script.js`.
 - **Modo detecção** (botão ou tecla `D`): desenha bounding boxes com classe e confiança sobre os elementos que têm o atributo `data-det="classe"` no HTML.
 
 ## Versões
