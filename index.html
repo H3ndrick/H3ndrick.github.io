@@ -179,6 +179,44 @@
             <a href="https://cinebrasil.gt.tc" target="_blank" rel="noopener">site</a>
             <a href="https://github.com/H3ndrick/cinebrasil-tcc" target="_blank" rel="noopener">código</a>
           </p>
+
+          <!-- Visualizador de prints no estilo dataset anotado.
+               Cada .shot__item é um "frame"; as caixas usam % da imagem (--l, --t, --w, --h). -->
+          <figure class="shot" aria-label="Capturas de tela do CineBrasil com anotações">
+            <div class="shot__bar mono">
+              <span class="shot__file">cinebrasil/inicio</span>
+              <span class="shot__nav">
+                <button type="button" class="shot__btn" data-step="-1" aria-label="Imagem anterior">◂</button>
+                <span class="shot__count">0001 / 0002</span>
+                <button type="button" class="shot__btn" data-step="1" aria-label="Próxima imagem">▸</button>
+              </span>
+              <button type="button" class="shot__toggle" aria-pressed="true">anotações</button>
+            </div>
+            <div class="shot__frame">
+              <div class="shot__item" data-file="cinebrasil/inicio">
+                <img src="img/cinebrasil-inicio.webp" width="1440" height="900" loading="lazy"
+                     alt="Página inicial do CineBrasil: menu, busca, botão de cadastro e cards de listas, comunidades e análises">
+                <div class="ann" style="--l:31; --t:1.6; --w:25.6; --h:4.4" data-label="navegação"></div>
+                <div class="ann" style="--l:78.6; --t:.4; --w:16.6; --h:5" data-label="busca"></div>
+                <div class="ann" style="--l:39.2; --t:31.6; --w:21.6; --h:7.8" data-label="cadastro · auth"></div>
+                <div class="ann" style="--l:5; --t:55.6; --w:28.3; --h:38.9" data-label="listas"></div>
+                <div class="ann" style="--l:35; --t:55.6; --w:28.3; --h:38.9" data-label="comunidades"></div>
+                <div class="ann" style="--l:65; --t:55.6; --w:28.3; --h:38.9" data-label="análises"></div>
+              </div>
+              <div class="shot__item" data-file="cinebrasil/filmes" hidden>
+                <img src="img/cinebrasil-filmes.webp" width="1440" height="900" loading="lazy"
+                     alt="Catálogo de filmes brasileiros do CineBrasil em grade de pôsteres, com dados da API do TMDB">
+                <div class="ann" style="--l:78.6; --t:.4; --w:16.6; --h:5" data-label="busca"></div>
+                <div class="ann" style="--l:13.06; --t:8.89; --w:13.89; --h:33.33" data-label="filme 0.98"></div>
+                <div class="ann" style="--l:28.06; --t:8.89; --w:13.89; --h:33.33" data-label="filme 0.97"></div>
+                <div class="ann" style="--l:43.06; --t:8.89; --w:13.89; --h:33.33" data-label="filme 0.99"></div>
+                <div class="ann" style="--l:58.06; --t:8.89; --w:13.89; --h:33.33" data-label="filme 0.96"></div>
+                <div class="ann" style="--l:73.06; --t:8.89; --w:13.89; --h:33.33" data-label="filme 0.98"></div>
+                <div class="ann ann--group" style="--l:12.4; --t:43.4; --w:75.2; --h:56.6" data-label="catálogo · API TMDB"></div>
+              </div>
+              <div class="shot__scan" aria-hidden="true"></div>
+            </div>
+          </figure>
         </li>
       </ol>
     </section>

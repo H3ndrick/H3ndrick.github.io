@@ -190,6 +190,49 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
 .proj:hover::after { opacity: 1; inset: 4px -20px 4px -20px; }
 .proj:first-child:hover::after { top: -20px; }
 
+/* ---------- prints dos projetos (dataset anotado) ---------- */
+.shot { margin-top: 18px; border: 1px solid var(--ink); background: var(--cam-bg); color: var(--cam-ink); position: relative; z-index: 1; }
+.shot__bar { display: flex; align-items: center; gap: 14px; padding: 7px 10px; font-size: .72rem; border-bottom: 1px solid #ffffff14; }
+.shot__file { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.shot__file::before { content: "IMG · "; opacity: .6; }
+.shot__count, .shot__toggle { white-space: nowrap; }
+.shot__nav { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+.shot__btn, .shot__toggle {
+  font: inherit; color: inherit; background: none; cursor: pointer;
+  border: 1px solid #ffffff26; padding: 2px 7px;
+}
+.shot__btn:hover, .shot__toggle:hover { border-color: var(--cam-ink); color: #fff; }
+.shot__toggle::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 6px; border: 1.5px solid currentColor; vertical-align: -1px; }
+.shot__toggle[aria-pressed="true"]::before { background: var(--det-ok); border-color: var(--det-ok); }
+.shot__frame { position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
+.shot__item { position: absolute; inset: 0; }
+.shot__item[hidden] { display: none; }
+.shot__item img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.75); transition: filter .3s; }
+.shot:hover .shot__item img { filter: none; }
+
+/* caixas de anotação */
+.ann {
+  position: absolute; left: calc(var(--l) * 1%); top: calc(var(--t) * 1%);
+  width: calc(var(--w) * 1%); height: calc(var(--h) * 1%);
+  border: 1.5px solid var(--det-ok); opacity: 0; transform: scale(1.03);
+  transition: opacity .25s, transform .25s, background .15s;
+}
+.ann::after {
+  content: attr(data-label); position: absolute; left: -1.5px; top: -1.5px; white-space: nowrap;
+  font: 500 10px/1 var(--mono); padding: 3px 5px; background: var(--det-ok); color: #0b0b0b;
+}
+.ann--group { border-style: dashed; }
+.ann:hover { background: color-mix(in srgb, var(--det-ok) 14%, transparent); }
+.shot.annotated .ann.on { opacity: 1; transform: none; }
+
+/* linha de varredura ("inferência") */
+.shot__scan {
+  position: absolute; left: 0; right: 0; top: 0; height: 2px; pointer-events: none; opacity: 0;
+  background: var(--det-ok); box-shadow: 0 0 18px 4px color-mix(in srgb, var(--det-ok) 45%, transparent);
+}
+.shot__scan.run { animation: scan 1.1s cubic-bezier(.4, 0, .2, 1) both; }
+@keyframes scan { 0% { top: 0; opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+
 /* stack */
 .stack { display: grid; }
 .stack div { display: grid; grid-template-columns: 180px 1fr; gap: 16px; padding: 12px 0; border-top: 1px solid var(--rule); }
@@ -260,4 +303,8 @@ kbd { font: 500 .85em var(--mono); border: 1px solid var(--rule); border-bottom-
   .proj { padding-right: 0; }
   .proj::after { display: none; }
   .cam__caption { flex-direction: column; gap: 8px; }
+  .ann::after { font-size: 8px; padding: 2px 3px; }
+  .shot__file::before { content: ""; }
+  .shot__bar { gap: 8px; font-size: .66rem; padding: 6px 8px; }
+  .shot__btn, .shot__toggle { padding: 2px 5px; }
 }

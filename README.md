@@ -26,6 +26,16 @@ Para editar textos, mexa só no `index.html`. Para trocar a cor de destaque, alt
 - **Quadro CAM-01** (topo): simula uma câmera com detecções e um falso alerta (sombra detectada como pessoa). A ROI-OFF mínima sugerida pode ser aprovada ou descartada, e o visitante pode desenhar as suas; detecções com o centro dentro de uma ROI-OFF são ignoradas. As caixas da cena ficam em `DETECTIONS` e `SUGGESTION` no `script.js`.
 - **Modo detecção** (botão ou tecla `D`): desenha bounding boxes com classe e confiança sobre os elementos que têm o atributo `data-det="classe"` no HTML.
 
+### Prints dos projetos (`.shot`)
+
+Cada projeto pode ter um visualizador no estilo "dataset anotado": a linha de varredura passa pela imagem e as caixas aparecem.
+
+1. Salve o print em `img/` (1440×900, de preferência `.webp`).
+2. Copie um bloco `<figure class="shot">` do CineBrasil no `index.html`.
+3. Para cada caixa, use `<div class="ann" style="--l:X; --t:Y; --w:L; --h:A" data-label="rótulo">`, com valores em **% da imagem** (pixel ÷ 1440 × 100 na horizontal, pixel ÷ 900 × 100 na vertical).
+
+Cada `.shot__item` é um frame; com mais de um, aparecem os botões ◂ ▸.
+
 ## Versões
 
 A primeira versão está salva na tag `v1-backup`, na branch `backup/v1` e em `~/projetos/portfolio-v1-backup/`.

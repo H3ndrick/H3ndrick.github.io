@@ -246,6 +246,53 @@
     blocks.forEach((b) => b.classList.add('seen'));
   }
 
+  /* ---------- prints dos projetos: varredura + anotações ---------- */
+  $$('.shot').forEach((shot) => {
+    const items = $$('.shot__item', shot);
+    const scan = $('.shot__scan', shot);
+    const file = $('.shot__file', shot);
+    const count = $('.shot__count', shot);
+    const toggle = $('.shot__toggle', shot);
+    let idx = 0, timers = [];
+    const fmt = (n) => String(n).padStart(4, '0');
+
+    const reveal = () => {
+      timers.forEach(clearTimeout); timers = [];
+      const anns = $$('.ann', items[idx]);
+      anns.forEach((a) => a.classList.remove('on'));
+      if (reduceMotion) { anns.forEach((a) => a.classList.add('on')); return; }
+      scan.classList.remove('run'); void scan.offsetWidth; scan.classList.add('run');
+      // cada caixa aparece quando a linha passa pelo topo dela
+      anns.forEach((a) => {
+        const t = parseFloat(a.style.getPropertyValue('--t')) || 0;
+        timers.push(setTimeout(() => a.classList.add('on'), 1100 * (t / 100) + 80));
+      });
+    };
+    const show = (i) => {
+      idx = (i + items.length) % items.length;
+      items.forEach((it, k) => { it.hidden = k !== idx; });
+      file.textContent = items[idx].dataset.file;
+      count.textContent = `${fmt(idx + 1)} / ${fmt(items.length)}`;
+      reveal();
+    };
+    $$('.shot__btn', shot).forEach((b) => b.addEventListener('click', () => show(idx + Number(b.dataset.step))));
+    toggle.addEventListener('click', () => {
+      const on = toggle.getAttribute('aria-pressed') !== 'true';
+      toggle.setAttribute('aria-pressed', String(on));
+      shot.classList.toggle('annotated', on);
+    });
+    shot.classList.add('annotated');
+    if (items.length < 2) $('.shot__nav', shot).hidden = true;
+
+    // roda a "inferência" na primeira vez que o print aparece na tela
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((en) => {
+        if (en[0].isIntersecting) { io.disconnect(); show(0); }
+      }, { threshold: 0.4 });
+      io.observe(shot);
+    } else { show(0); }
+  });
+
   /* ---------- copiar e-mail ---------- */
   const copyBtn = $('#copy-email');
   const status = $('#copy-status');
